@@ -1,0 +1,317 @@
+﻿<div class="theme-yellow ls-closed" >
+    <!-- Page Loader -->
+    
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+   <!--  <div class="overlay"></div> -->
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar" style="height: 70px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+
+                <a href="javascript:void(0);"  class="bars" style="color:black !important;"></a>
+                <a class="navbar-brand" href="#" style="color:black !important;">City Kruiz</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+         <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="mainassets/images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container" >
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black !important;">John Doe</div>
+                    <div class="email" style="color:black !important;">john.doe@example.com</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);">
+                                <i class="fas fa-user" style="color:black !important;"> Edit profile</i></a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home icons"></i>
+
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/payment">
+                            <i class="fas fa-money-bill icons"></i>
+                            <span>Payment</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/profile">
+                            <i class="fas fa-user icons"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/history">
+                            <i class="fas fa-history icons"></i>
+                            <span>History</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/notification">
+                            <i class="fas fa-bell icons"></i>
+                            <span>Notification</span>
+                        </a>
+                        </li>
+                            <li>
+                                <a href="/setting">
+                                    <i class="fas fa-cog icons"></i>
+                                    <span>Settings</span>
+                                </a>
+                            
+                            </li>
+                            <li>
+                                <a href="/help">
+                                    <i class="fas fa-question-circle icons"></i>
+                                    <span>Help</span>
+                                </a>
+                            </li>
+                       
+                    <li>
+                        <a href="/logout">
+                            <i class="fas fa-sign-out-alt icons"></i>
+                            <span>Log out</span>
+                        </a>
+
+                    </li>
+                    
+                </ul>
+            </div>
+                  </aside>
+        
+    </section>
+
+
+   
+
+  <section class="content">
+
+        <div class="row">
+            <div id="map"></div>
+                <div class="col-md-12 bold" style="margin-top: 15px;" >
+
+                <div class="table-responsive" style="background-color: white;">
+                         <div class="table-responsive" style="background-color: white;">
+                    <table class="table no-margin">
+                   
+                      <tbody>
+
+                        <tr>
+
+                            <td>
+                                 <i class="fas fa-circle primary" style=" margin-top: 30px;"></i>
+                            </td>
+                        <td width="90%">
+                            <input id="origin-input"  type="text" name="" class="form-control bottomtxtbox" placeholder="Enter your pickup location"></td>
+                        
+        
+                        </tr>
+
+                           <tr>
+
+                            <td>
+                                 <i class="fas fa-circle" style="color: green; margin-top: 30px;"></i>
+                            </td>
+                        <td width="90%">
+                            <input id="destination-input" 
+                            type="text" name="" class="form-control bottomtxtbox" placeholder="Enter your destination"></td>
+                        
+        
+                        </tr>
+
+
+                    <div id="mode-selector" class="controls" style="display: none;">
+                          <input type="radio" name="type" id="changemode-walking" >
+                          <label for="changemode-walking">Walking</label>
+
+                          <input type="radio" name="type" id="changemode-transit">
+                          <label for="changemode-transit">Transit</label>
+
+                          <input type="radio" name="type" id="changemode-driving" checked="checked">
+                          <label for="changemode-driving">Driving</label>
+                        </div>
+
+                      </tbody>
+                    </table>
+                     </div>
+
+            </div>
+                                                      
+                    </div><!-- <! /.col --> 
+             
+  </div>
+
+
+<!-- <script type="text/javascript">
+
+                 function reload(){
+
+                  location.reload();
+                 }
+
+                  
+                </script>
+  -->
+
+</section>
+    <a href="/setlocation">
+ <footer class="footer" style="position: fixed;">
+
+    <small  class="primary" style="margin-left: 10%"> Proceed </small>
+
+     
+ <button class="btn  btn-lg pull-right" 
+
+        style="background-color: white;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-image: url(mainassets/images/compass2.png);
+                background-repeat: no-repeat;
+                background-position-x: 9px;
+                background-position-y: 9px;
+                margin-top: 7px;" >
+       
+     </button>
+ 
+
+    </footer>
+</a>
+
+
+
+</div>
+   
+ <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeControl: false,
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+
+        new AutocompleteDirectionsHandler(map);
+      }
+
+       /**
+        * @constructor
+       */
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'WALKING';
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
+
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+      }
+
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
+      };
+
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
+
+      };
+
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+            me.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxikh20Umb-Fq7eUF53NAeT0NsCZg8j-A&libraries=places&callback=initMap"
+        async defer></script>
+   
