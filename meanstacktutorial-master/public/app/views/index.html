@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+            <html lang="en" ng-app="userApp" ng-controller="mainCtrl as main" >
+
+            <head>
+                <base href="/">
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta name="description" content="">
+                <meta name="author" content="">
+
+                <!-- Main Angular Files -->
+                <script src="assets/js/angular.js"></script>
+                <script src="assets/js/angular-route.js"></script>
+                <script src="assets/js/angular-animate.js"></script>
+                 <script src="assets/js/angular-sanitize.js"></script>
+
+                <!-- Angular Config/Routes -->
+                <script src="app/app.js"></script>
+                <script src="app/routes.js"></script>
+
+                <!-- Angular Controllers -->
+                <script src="app/controllers/userCtrl.js"></script>
+                <script src="app/controllers/mainCtrl.js"></script>
+                <script src="app/controllers/emailCtrl.js"></script>
+                <script src="app/controllers/managementCtrl.js"></script>
+
+                <!-- Angular Services -->
+                <script src="app/services/userServices.js"></script>
+                <script src="app/services/authServices.js"></script>
+
+                
+
+              <link rel="stylesheet" type="text/css" href="mainassets/plugins/bootstrap/css/bootstrap.css" ng-if="main.isLoggedIn">
+
+                <link rel="stylesheet" type="text/css" href="mainassets/plugins/node-waves/waves.css" ng-if="main.isLoggedIn">
+
+                <link rel="stylesheet" type="text/css" href="mainassets/plugins/animate-css/animate.css" ng-if="main.isLoggedIn">
+
+                <link rel="stylesheet" type="text/css" href="mainassets/css/style.css" ng-if="main.isLoggedIn">
+
+                 <link rel="stylesheet" type="text/css" href="mainassets/css/css/material-icons.css" ng-if="main.isLoggedIn">
+
+
+                 <link rel="stylesheet" type="text/css" href="mainassets/css/themes/all-themes.css" ng-if="main.isLoggedIn">
+
+                  <link rel="stylesheet" type="text/css" href="mainassets/css/webfonts/css/fontawesome-all.css" ng-if="main.isLoggedIn">
+
+                  <link rel="stylesheet" type="text/css" href="mainassets/adminlte/dist/css/AdminLTE.css" ng-if="main.isLoggedIn">
+
+
+                  <link rel="stylesheet" type="text/css" href="myassets/css/bootstrap2.css" ng-if="!main.isLoggedIn">
+
+                   <link rel="stylesheet" type="text/css" href="myassets/css/album.css" ng-if="!main.isLoggedIn">
+
+                   <link rel="stylesheet" type="text/css" href="myassets/css/floating-labels.css" ng-if="!main.isLoggedIn">
+
+                    <link rel="stylesheet" type="text/css" href="myassets/webfonts/css/fontawesome-all.css" ng-if="!main.isLoggedIn">
+
+                    <link rel="stylesheet" type="text/css" href=assets/css/animate.css" ng-if="!main.isLoggedIn">
+
+
+
+                  <script type="text/javascript" src="mainassets/plugins/jquery/jquery.min.js" ng-if="main.isLoggedIn"></script>
+
+                   <script type="text/javascript" src="mainassets/plugins/bootstrap/js/bootstrap.js" ng-if="main.isLoggedIn"></script>
+
+                     <script src="mainassets/js/admin.js" ></script>
+                    
+     <style type="text/css">
+       
+
+       #map {
+        height: 100%;
+      }
+
+     </style>
+
+
+ 
+    
+
+            </head>
+
+<body ng-show="main.loadme" ng-cloak>
+
+  
+   
+   <div ng-view></div>
+
+    
+
+    
+   <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeControl: false,
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+
+        new AutocompleteDirectionsHandler(map);
+      }
+
+       /**
+        * @constructor
+       */
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'WALKING';
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
+
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+      }
+
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
+      };
+
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
+
+      };
+
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+            me.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxikh20Umb-Fq7eUF53NAeT0NsCZg8j-A&libraries=places&callback=initMap"
+        async defer></script>
+
+  
+ 
+
+     <script src="assets/js/jquery-3.1.1.min.js" ></script>
+
+    <script src="assets/js/bootstrap.js" ></script>
+
+   
+    <script src="mainassets/plugins/node-waves/waves.js" ></script>
+
+    <script src="mainassets/plugins/jquery-countto/jquery.countTo.js" ></script>
+
+   
+    <script src="mainassets/js/admin.js" ></script>
+
+
+
+
+
+    
+
+
+  
+
+
+</body>
+
+</html>
